@@ -1,0 +1,108 @@
+<div>
+    <div class="modal-title">
+        <h2 *ngIf="data.typeDialog === 'CREATE'">Crear Estudiante</h2>
+        <h2 *ngIf="data.typeDialog === 'EDIT'">Editar Estudiante</h2>
+        <h2 *ngIf="data.typeDialog === 'DELETE'">Eliminar Estudiante</h2>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-content">
+
+        <div *ngIf="data.typeDialog === 'CREATE' || data.typeDialog === 'EDIT'">
+            <form [formGroup]="dialogForm">
+                <form>
+                    <div class="form-group">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Sede</mat-label>
+                            <input type="text"
+                                   placeholder="Sede"
+                                   aria-label="Number"
+                                   matInput
+                                   [formControl]="controlHeadquarterAutoComplete"
+                                   [matAutocomplete]="autoHeadquarter">
+                            <mat-autocomplete #autoHeadquarter="matAutocomplete">
+                              <mat-option *ngFor="let headquarter of filteredHeadquarters | async" [value]="headquarter.id">
+                                {{headquarter.name_headquarter}}
+                              </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </form>
+                <div class="form-group">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Curso</mat-label>
+                        <input type="text"
+                               placeholder="Curso"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="controlCoursesAutoComplete"
+                               [matAutocomplete]="autoCourse">
+                        <mat-autocomplete #autoCourse="matAutocomplete">
+                          <mat-option *ngFor="let course of filteredCourses | async" [value]="course.id">
+                            {{course.name}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Estudiante</mat-label>
+                        <input type="text"
+                               placeholder="Estudiante"
+                               aria-label="Number"
+                               matInput
+                               [formControl]="controlStudentsAutoComplete"
+                               [matAutocomplete]="autoStudent">
+                        <mat-autocomplete #autoStudent="matAutocomplete">
+                          <mat-option *ngFor="let student of filteredStudents | async" [value]="student.student.id">
+                            {{student.person.document_number}} - {{student.person.name}} {{student.person.last_name}}
+                          </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Valor Matricula</mat-label>
+                        <input matInput placeholder="Ingrese el número de documento" formControlName="total">
+                        <mat-error *ngIf="total.invalid">Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Metodo de pago</mat-label>
+                        <mat-select formControlName="method_payment">
+                          <mat-option *ngFor="let method of listMethodPayment" [value]="method.value">
+                            {{method.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="state">
+                          <mat-option *ngFor="let state of listState" [value]="state.value">
+                            {{state.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="data.typeDialog === 'DELETE'">
+            <p>¿Estás seguro(a) que deseas eliminar?</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-actions">
+        <button mat-button (click)="closeModal()">
+            Cancelar
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'CREATE'" (click)="create()" [disabled]="!dialogForm.valid">
+            Crear
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'EDIT'" (click)="update()" [disabled]="!dialogForm.valid">
+            Actualizar
+        </button>
+    </div>
+</div>

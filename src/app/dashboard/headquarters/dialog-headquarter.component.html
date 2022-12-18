@@ -1,0 +1,55 @@
+<div>
+    <div class="modal-title">
+        <h2 *ngIf="data.typeDialog === 'CREATE'">Crear Sede</h2>
+        <h2 *ngIf="data.typeDialog === 'EDIT'">Editar Sede</h2>
+        <h2 *ngIf="data.typeDialog === 'DELETE'">Eliminar Sede</h2>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-content">
+
+        <div *ngIf="data.typeDialog === 'CREATE' || data.typeDialog === 'EDIT'">
+            <form [formGroup]="headquarterForm">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre Sede</mat-label>
+                        <input matInput placeholder="Ingrese el nombre de la sede" formControlName="name_headquarter">
+                        <mat-error *ngIf="name_headquarter.invalid">Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Dirección</mat-label>
+                        <input matInput placeholder="Ingrese la dirección de la sede" formControlName="address">
+                        <mat-error *ngIf="address.invalid">Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="state">
+                          <mat-option *ngFor="let state of listState" [value]="state.value">
+                            {{state.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="data.typeDialog === 'DELETE'">
+            <p>¿Estás seguro(a) que deseas eliminar este archivo?</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-actions">
+        <button mat-button (click)="closeModal()">
+            Cancelar
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'CREATE'" (click)="createHeadquarter()" [disabled]="!headquarterForm.valid">
+            Crear
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'EDIT'" (click)="updateHeadquarter()" [disabled]="!headquarterForm.valid">
+            Actualizar
+        </button>
+    </div>
+</div>

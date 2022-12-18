@@ -1,0 +1,53 @@
+<div class="sidebar-container">
+    <mat-toolbar color="primary" class="sidebar-toolbar">
+        <button mat-icon-button (click)="snav.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <h1 class="sidebar-app-name">CEFCAE</h1>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidebar-sidenav-container">
+        <mat-sidenav #snav mode="side" fixedTopGap="56" opened="true">
+            <mat-nav-list class="side-navbar">
+                <div>
+                    <a mat-list-item [routerLink]="['headquarters']" *ngIf="typeMenu.employee_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>SEDES</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['courses']" *ngIf="typeMenu.employee_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>CURSOS</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['employees']" *ngIf="typeMenu.employee_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>TRABAJADORES</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['students']" *ngIf="typeMenu.employee_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>ESTUDIANTES</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['enrollments']" *ngIf="typeMenu.employee_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>MATRICULAS</span>
+                    </a>
+                    <a mat-list-item [routerLink]="['mycourses']" *ngIf="typeMenu.student_id != null">
+                        <mat-icon>list</mat-icon>
+                        <span>MIS CURSOS </span>
+                    </a>
+                </div>
+
+            </mat-nav-list>
+            <div class="bottom-sidebar">
+                <mat-divider></mat-divider>
+                <div>
+                    <button mat-button aria-label="Logout" (click)="logout()">
+                        <mat-icon>logout</mat-icon>
+                        CERRAR SESIÓN
+                    </button>
+                </div>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content class="router-container">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

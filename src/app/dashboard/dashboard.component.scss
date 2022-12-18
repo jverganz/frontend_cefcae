@@ -1,0 +1,124 @@
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.sidebar-is-mobile .sidebar-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+}
+
+.loader-container {
+    height: 3px
+}
+
+h1.sidebar-app-name {
+    margin-left: 8px;
+    width: 185px;
+}
+
+.sidebar-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+         causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+    background-color: rgb(223, 222, 222) !important;
+}
+
+.sidebar-is-mobile .sidebar-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+         `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+
+}
+
+.mat-drawer {
+    width: 250px;
+}
+
+.router-container {
+    padding: 5px 20px;
+}
+
+::ng-deep .mat-expansion-panel-header {
+    padding: 0 16px !important;
+}
+
+::ng-deep .mat-nav-list .mat-icon {
+    margin-right: 10px;
+}
+
+::ng-deep .mat-expansion-panel-body {
+    padding: 0 !important
+}
+
+::ng-deep .mat-expansion-panel-header {
+    height: 48px !important;
+}
+
+::ng-deep .mat-expansion-panel .mat-list-item {
+    padding-left: 15px !important;
+}
+
+::ng-deep .mat-nav-list .is-active {
+    background-color: rgb(204, 204, 204) !important;
+    border-left: 8px solid rgb(139, 137, 133);
+    width: calc(100% - 8px) !important;
+    ;
+}
+
+::ng-deep .mat-list-base {
+    padding-top: 0 !important;
+}
+
+::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
+    padding: 0 8px;
+}
+
+.mat-acordion {
+    border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+}
+
+.mat-expansion-panel {
+    box-shadow: none;
+}
+
+.subitem-father-sidenav {
+    padding-left: 15px !important;
+}
+
+.side-navbar {
+    height: 95%;
+}
+
+.bottom-sidebar {
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+}
+
+.container-dashboard {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidenav {
+    padding: 20px;
+}
+
+.item-sidebar mat-icon {
+    margin-right: 10px;
+}

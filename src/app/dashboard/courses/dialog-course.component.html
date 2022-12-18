@@ -1,0 +1,48 @@
+<div>
+    <div class="modal-title">
+        <h2 *ngIf="data.typeDialog === 'CREATE'">Crear Curso</h2>
+        <h2 *ngIf="data.typeDialog === 'EDIT'">Editar Curso</h2>
+        <h2 *ngIf="data.typeDialog === 'DELETE'">Eliminar Curso</h2>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-content">
+
+        <div *ngIf="data.typeDialog === 'CREATE' || data.typeDialog === 'EDIT'">
+            <form [formGroup]="dialogForm">
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Nombre Curso</mat-label>
+                        <input matInput placeholder="Ingrese el nombre" formControlName="name">
+                        <mat-error *ngIf="name.invalid">Este campo es requerido</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Estado</mat-label>
+                        <mat-select formControlName="state">
+                          <mat-option *ngFor="let state of listState" [value]="state.value">
+                            {{state.viewValue}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="data.typeDialog === 'DELETE'">
+            <p>¿Estás seguro(a) que deseas eliminar este archivo?</p>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="modal-actions">
+        <button mat-button (click)="closeModal()">
+            Cancelar
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'CREATE'" (click)="create()" [disabled]="!dialogForm.valid">
+            Crear
+        </button>
+        <button mat-flat-button color="primary" *ngIf="data.typeDialog === 'EDIT'" (click)="update()" [disabled]="!dialogForm.valid">
+            Actualizar
+        </button>
+    </div>
+</div>
